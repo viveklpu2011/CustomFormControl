@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CustomListControls.MainPage">
+
+   <Grid RowDefinitions="Auto,*" Padding="10" RowSpacing="10">
+       <VerticalStackLayout Grid.Row="0">
+           <Entry x:Name="entryFirstName" Placeholder="First Name" Text="{Binding FirstName}" />
+           <Entry  x:Name="entryLastName" Placeholder="Last Name" Text="{Binding LastName}"/>
+           <Picker Title="Country" x:Name="picketCountry" ItemsSource="{Binding Countries}"
+                   ItemDisplayBinding="{Binding CountryName}"
+                   SelectedItem="{Binding SelectedCountry}"/>
+           <HorizontalStackLayout>
+               <CheckBox HorizontalOptions="Start" x:Name="checkIsSelected" IsChecked="{Binding IsSelectedCheckBox}"/>
+               <Label Text="Is Selected" VerticalOptions="CenterAndExpand"/>
+           </HorizontalStackLayout>
+           <Button BackgroundColor="LightGreen" Text="Save" x:Name="btnSave" Command="{Binding SubmitCommand}"/>
+        </VerticalStackLayout>
+       <ScrollView Grid.Row="1" Orientation="Both">
+           <Grid RowDefinitions="50,Auto"
+                 ColumnDefinitions="100,100,100,100">
+               <Label Text="First Name" BackgroundColor="LightGray" Grid.Column="0" Grid.Row="0"/>
+               <Label Text="Last Name" BackgroundColor="LightGray" Grid.Column="1" Grid.Row="0"/>
+               <Label Text="Country" BackgroundColor="LightGray" Grid.Column="2" Grid.Row="0"/>
+               <Label Text="Is Selected" BackgroundColor="LightGray" Grid.Column="3" Grid.Row="0"/>
+               <VerticalStackLayout Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" BindableLayout.ItemsSource="{Binding PersonDataList}">
+                   <BindableLayout.ItemTemplate>
+                       <DataTemplate>
+                           <Grid ColumnDefinitions="100,100,100,100">
+                        <Label Text="{Binding FirstName}" Grid.Column="0"/>
+                        <Label Text="{Binding LastName}" Grid.Column="1"/>
+                        <Label Text="{Binding CountryName}" Grid.Column="2"/>
+                        <Label Text="{Binding IsSelected}" Grid.Column="3"/>
+                   </Grid>
+                       </DataTemplate>
+                   </BindableLayout.ItemTemplate>
+               </VerticalStackLayout>
+            </Grid>
+       </ScrollView>
+   </Grid>
+
+</ContentPage>
+
